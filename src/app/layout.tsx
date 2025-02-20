@@ -20,8 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
-        <StoreProvider>{children}</StoreProvider>
+      <body className={`${inter.variable} bg-custom-bg antialiased`}>
+        <StoreProvider>
+          <main className="mb-16 w-[398px] pt-16">{children}</main>
+        </StoreProvider>
       </body>
     </html>
   );
