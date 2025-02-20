@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
     --background: #ffffff;
@@ -32,20 +28,19 @@ body {
     --chart-3: #264753;
     --chart-4: #e8c468;
     --chart-5: #f4a361;
-    --custom--bg: #F5F5F5;
-    --custom-primary: #0D99FF;
-    --custom-secondary: #0D99FF1A;
-    --custom-danger-primary: #FF4034;
-    --custom-danger-secondary: #FFE0DE;
-    --custom-warning: #FE7E08;
-    --custom-border: #E2E2E2;
+    --custom-bg: #f5f5f5;
+    --custom-primary: #0d99ff;
+    --custom-secondary: #0d99ff1a;
+    --custom-danger-primary: #ff4034;
+    --custom-danger-secondary: #ffe0de;
+    --custom-warning: #fe7e08;
+    --custom-border: #e2e2e2;
     --custom-dark: #000000;
     --custom-grey: #717171;
-    --custom-light: #FFFFFF;
-    --custom-tag1: #FFF6E8;
-    --custom-tag2: #ECFFE8;
-    --custom-tag3: #E8FEFF;
-
+    --custom-light: #ffffff;
+    --custom-tag1: #fff6e8;
+    --custom-tag2: #ecffe8;
+    --custom-tag3: #e8feff;
   }
   .dark {
     --background: #090909;
@@ -72,19 +67,19 @@ body {
     --chart-3: #e88c30;
     --chart-4: #af56db;
     --chart-5: #e2366f;
-    --custom--bg: #717171;
-    --custom-primary: #0D99FF;
-    --custom-secondary: #0D99FF1A;
-    --custom-danger-primary: #FF4034;
-    --custom-danger-secondary: #FFE0DE;
-    --custom-warning: #FE7E08;
-    --custom-border: #E2E2E2;
-    --custom-dark: #FFFFFF;
+    --custom-bg: #717171;
+    --custom-primary: #0d99ff;
+    --custom-secondary: #0d99ff1a;
+    --custom-danger-primary: #ff4034;
+    --custom-danger-secondary: #ffe0de;
+    --custom-warning: #fe7e08;
+    --custom-border: #e2e2e2;
+    --custom-dark: #ffffff;
     --custom-grey: #717171;
     --custom-light: #000000;
-    --custom-tag1: #FFF6E8;
-    --custom-tag2: #ECFFE8;
-    --custom-tag3: #E8FEFF;
+    --custom-tag1: #fff6e8;
+    --custom-tag2: #ecffe8;
+    --custom-tag3: #e8feff;
   }
 }
 
@@ -97,26 +92,32 @@ body {
   }
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body {
+  font-size: 14px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--custom-bg)
+  background-color: var(--custom-bg);
 }
 
-input, button {
+input,
+button {
   font: inherit;
 }
 
-p:hover, h1, h2 {
+p:hover,
+h1,
+h2 {
   cursor: default;
 }
 

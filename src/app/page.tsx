@@ -1,3 +1,5 @@
+import SearchBar from "@/components/homePage/SearchBar";
+
 export default function Home() {
-  return <div>Home</div>;
+  return <SearchBar></SearchBar>;
 }
