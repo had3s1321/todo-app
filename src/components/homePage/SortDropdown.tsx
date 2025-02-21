@@ -39,7 +39,11 @@ const SortDropdown = () => {
         >
           {sortOptions.map((option, i) => (
             <React.Fragment key={option}>
-              <DropdownMenuRadioItem value={option} className="text-[12px]">
+              <DropdownMenuRadioItem
+                value={option}
+                className="text-[12px]"
+                onSelect={(e) => e.preventDefault()}
+              >
                 {option}
               </DropdownMenuRadioItem>
               {i !== sortOptions.length - 1 && <DropdownMenuSeparator />}
@@ -50,8 +54,5 @@ const SortDropdown = () => {
     </DropdownMenu>
   );
 };
-//combo-box
-//dropdown menu
-//radio group
-//select
+
 export default SortDropdown;
