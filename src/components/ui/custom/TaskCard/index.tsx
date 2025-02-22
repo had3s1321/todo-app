@@ -33,10 +33,10 @@ const TaskCard = ({ todo, large }: TaskCardProps) => {
             <h2>{todo.name}</h2>
           </div>
           <div className="flex gap-3">
-            <Button variant="roundCustom" size="smCustom">
+            <Button variant="round" size="smCustom">
               <EditTaskIconSmall />
             </Button>
-            <Button variant="roundCustom" size="smCustom">
+            <Button variant="round" size="smCustom">
               <CheckIconSmall />
             </Button>
           </div>
