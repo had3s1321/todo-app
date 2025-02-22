@@ -19,7 +19,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        lgCustom: "bg-[var(--custom-secondary)]",
+        roundCustom: "bg-[var(--custom-secondary)]",
         dropdown: "bg-[var(--custom-light)]",
       },
       size: {
@@ -28,6 +28,7 @@ const buttonVariants = cva(
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
         lgCustom: "h-[36px] w-[36px] [&_svg]:size-[24px]",
+        smCustom: "h-[32px] w-[32px] [&_svg]:size-[18px]",
         dropdown: "w-full p-3",
       },
     },

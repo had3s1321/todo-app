@@ -1,16 +1,5 @@
 import { createReducer, createAction } from "@reduxjs/toolkit";
-
-interface TodoInterface {
-  id: string;
-  name: string;
-  isCompleted: boolean;
-  priority: number;
-  complexity: number;
-  date: string;
-  time: string;
-  subtasks: string[];
-  tags: string[];
-}
+import { TodoInterface } from "@/utils/types/Todo";
 
 const addTodo = createAction<TodoInterface>("ADD_TODO");
 const toggleTodo = createAction<TodoInterface>("TOGGLE_TODO");
