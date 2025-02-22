@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} bg-custom-bg antialiased`}>
+      <body className={`${inter.className} bg-custom-bg antialiased`}>
         <StoreProvider>
           <main className="mb-16 flex w-[398px] flex-col gap-5 pt-16">
             {children}

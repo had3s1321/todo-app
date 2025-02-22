@@ -35,7 +35,7 @@ const CategoryDropdown = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="dropdown" size="dropdown">
-          {"Categories"}
+          {"Category"}
           <ChevronDownIcon />
         </Button>
       </DropdownMenuTrigger>
