@@ -21,7 +21,7 @@ const SearchBar = () => {
       />
       <SearchIcon />
       <Button
-        variant="roundCustom"
+        variant="round"
         size="lgCustom"
         className="absolute right-0 top-0 mr-3 mt-3"
       >
