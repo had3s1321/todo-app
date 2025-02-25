@@ -12,6 +12,9 @@ const buttonVariants = cva(
         dropdown: "bg-[var(--custom-light)]",
         round: "bg-[var(--custom-secondary)]",
         action: "bg-[var(--custom-primary)]",
+        submit:
+          "mx-auto flex gap-2 rounded-[30px] bg-[var(--custom-primary)] p-4 text-[18px] text-white",
+        date: "bg-[var(--custom-light)]",
       },
       size: {
         default: "h-9 px-4 py-2",
@@ -20,7 +23,8 @@ const buttonVariants = cva(
         icon: "h-9 w-9",
         dropdown: "w-full p-3",
         smCustom: "h-[32px] w-[32px] [&_svg]:size-[18px]",
-        lgCustom: "h-[36px] w-[36px] [&_svg]:size-[24px]",
+        noCustom: "h-[36px] w-[36px] [&_svg]:size-[24px]",
+        lgCustom: "h-[44px] w-[44px] [&_svg]:size-[24px]",
         xlCustom: "h-[60px] w-[192px] [&_svg]:size-[24px]",
       },
     },
