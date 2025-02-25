@@ -124,3 +124,24 @@ h2 {
 button > *:hover {
   cursor: pointer;
 }
+
+@layer utilities {
+  .custom-time-picker {
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .custom-time-picker::-webkit-calendar-picker-indicator:hover {
+    cursor: pointer;
+  }
+
+  .custom-time-picker::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 1rem;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%230d99ff'><path d='M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm.5-13h-1v6l4.3 2.6.5-.8-3.8-2.3z'/></svg>");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}

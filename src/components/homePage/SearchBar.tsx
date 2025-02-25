@@ -22,7 +22,7 @@ const SearchBar = () => {
       <SearchIcon />
       <Button
         variant="round"
-        size="lgCustom"
+        size="noCustom"
         className="absolute right-0 top-0 mr-3 mt-3"
       >
         <ArrowRightIcon />
