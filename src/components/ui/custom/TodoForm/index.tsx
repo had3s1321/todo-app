@@ -28,16 +28,21 @@ import {
 } from "@/components/ui/popover";
 import { CheckIcon, DeleteIcon } from "../../icons";
 import Subtask from "../Subtask";
+import { useAppDispatch } from "@/lib/hooks";
+import { addTodo } from "@/lib/features/todosReducer";
+import { v4 as uuidv4 } from "uuid";
+import { getTags } from "@/utils/getTags";
 
 const TodoForm = () => {
   const subtaskRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      priority: 1,
-      complexity: 1,
+      priority: "1",
+      complexity: "1",
       date: new Date(),
       time: "",
       subtasks: [],
@@ -66,8 +71,20 @@ const TodoForm = () => {
   };
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    //eslint-disable-next-line
-    console.log(values);
+    const payload = {
+      id: uuidv4(),
+      name: values.name,
+      isCompleted: false,
+      priority: Number(values.priority),
+      complexity: Number(values.complexity),
+      date: values.date.toISOString().substring(0, 10),
+      time: values.time,
+      subtasks: values.subtasks.map((subtask) => {
+        return { name: subtask, isCompleted: false };
+      }),
+      tags: getTags(values.tags),
+    };
+    dispatch(addTodo(payload));
     router.push("/");
   };
 
@@ -98,7 +115,7 @@ const TodoForm = () => {
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
-                  defaultValue={field.value.toString()}
+                  defaultValue={field.value}
                   className="flex flex-wrap gap-2"
                 >
                   {[...Array(10)].map((_, i) => (
@@ -133,7 +150,7 @@ const TodoForm = () => {
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
-                  defaultValue={field.value.toString()}
+                  defaultValue={field.value}
                   className="flex flex-wrap gap-2"
                 >
                   {[...Array(10)].map((_, i) => (
@@ -172,12 +189,12 @@ const TodoForm = () => {
                       <Button
                         variant="date"
                         className={cn(
-                          "h-10 border pl-3 text-left font-normal",
+                          "h-10 w-full border pl-4 text-left text-[16px] font-normal",
                           !field.value && "text-muted-foreground",
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP")
+                          format(field.value, "dd-MM-yyyy")
                         ) : (
                           <span>Pick a date</span>
                         )}
@@ -194,9 +211,8 @@ const TodoForm = () => {
                       selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date) =>
-                        date < new Date() || date < new Date("1900-01-01")
+                        date <= new Date() || date < new Date("1900-01-01")
                       }
-                      initialFocus
                     />
                   </PopoverContent>
                 </Popover>
@@ -208,7 +224,7 @@ const TodoForm = () => {
             control={form.control}
             name="time"
             render={({ field }) => (
-              <FormItem className="relative w-full">
+              <FormItem className="relative w-[264px]">
                 <FormLabel className="text-[18px]">Select Time</FormLabel>
                 <FormControl>
                   <Input

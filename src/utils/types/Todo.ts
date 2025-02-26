@@ -7,7 +7,6 @@ export interface TodoInterface {
   date: string;
   time: string;
   subtasks: {
-    id: string;
     name: string;
     isCompleted: boolean;
   }[];

@@ -1,10 +1,10 @@
 import { createReducer, createAction } from "@reduxjs/toolkit";
 import { TodoInterface } from "@/utils/types/Todo";
 
-const addTodo = createAction<TodoInterface>("ADD_TODO");
-const toggleTodo = createAction<TodoInterface>("TOGGLE_TODO");
-const editTodo = createAction<TodoInterface>("EDIT_TODO");
-const removeTodo = createAction<TodoInterface>("REMOVE_TODO");
+export const addTodo = createAction<TodoInterface>("ADD_TODO");
+export const toggleTodo = createAction<TodoInterface>("TOGGLE_TODO");
+export const editTodo = createAction<TodoInterface>("EDIT_TODO");
+export const removeTodo = createAction<TodoInterface>("REMOVE_TODO");
 
 export const todosReducer = createReducer(<TodoInterface[]>[], (builder) => {
   builder
