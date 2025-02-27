@@ -1,10 +1,11 @@
-import { createReducer, createAction } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit";
 import { TodoInterface } from "@/utils/types/Todo";
-
-export const addTodo = createAction<TodoInterface>("ADD_TODO");
-export const toggleTodo = createAction<TodoInterface>("TOGGLE_TODO");
-export const editTodo = createAction<TodoInterface>("EDIT_TODO");
-export const removeTodo = createAction<TodoInterface>("REMOVE_TODO");
+import {
+  addTodo,
+  toggleTodo,
+  editTodo,
+  removeTodo,
+} from "@/lib/features/todo/actions";
 
 export const todosReducer = createReducer(<TodoInterface[]>[], (builder) => {
   builder
