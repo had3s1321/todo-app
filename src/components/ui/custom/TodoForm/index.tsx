@@ -29,7 +29,7 @@ import {
 import { CheckIcon, DeleteIcon } from "../../icons";
 import Subtask from "../Subtask";
 import { useAppDispatch } from "@/lib/hooks";
-import { addTodo } from "@/lib/features/todosReducer";
+import { addTodo } from "@/lib/features/todo/actions";
 import { v4 as uuidv4 } from "uuid";
 import { getTags } from "@/utils/getTags";
 

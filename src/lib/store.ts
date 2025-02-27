@@ -1,9 +1,36 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { todosReducer } from "./features/todosReducer";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import {
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { todosReducer } from "./features/todo/todosReducer";
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const combinedReducers = combineReducers({
+  todos: todosReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, combinedReducers);
 
 export const makeStore = () => {
   return configureStore({
-    reducer: { todos: todosReducer },
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }),
   });
 };
 
