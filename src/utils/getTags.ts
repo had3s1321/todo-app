@@ -9,6 +9,7 @@ export const getTags = (string: string) => {
   if (!string || !string.trim()) return [{ name: "N/A", color: "N/A" }];
   const result: Tag[] = [];
   string.split(",").forEach((tag) => {
+    if (!tag.trim()) return;
     if (result.filter((el) => el.name === tag.trim()).length === 1) return;
     result.push({ name: tag.trim(), color: pickRandomColor() });
   });

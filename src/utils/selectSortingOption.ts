@@ -1,15 +1,6 @@
 import { convertDateAndTimeToMilliseconds } from "./convertDateAndTimeToMilliseconds";
+import { SortingOptions } from "./types/SortingOptions";
 import { TodoInterface } from "./types/Todo";
-
-type SortingOptions =
-  | "Default"
-  | "Ascending Date"
-  | "Descending Date"
-  | "Ascending Complexity"
-  | "Descending Complexity"
-  | "Ascending Priority"
-  | "Descending Priority"
-  | "Power Mode";
 
 export const sortingOptions = [
   "Default",

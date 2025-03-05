@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,9 +12,12 @@ import {
 import { Button } from "../ui/button";
 import { ChevronDownIcon } from "../ui/icons";
 import { sortingOptions } from "@/utils/selectSortingOption";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { changeSortingOption } from "@/lib/features/options/optionsSlice";
 
 const SortDropdown = () => {
-  const [sortOption, setSortOption] = useState("Default");
+  const dispatch = useAppDispatch();
+  const sortOption = useAppSelector((state) => state.options.sortOption);
 
   return (
     <DropdownMenu>
@@ -27,7 +30,7 @@ const SortDropdown = () => {
       <DropdownMenuContent className="w-full">
         <DropdownMenuRadioGroup
           value={sortOption}
-          onValueChange={setSortOption}
+          onValueChange={(value) => dispatch(changeSortingOption(value))}
         >
           {sortingOptions.map((option, i) => (
             <React.Fragment key={option}>

@@ -22,7 +22,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ProgressBar from "@/components/taskDetails/ProgressBar";
 import { useAppDispatch } from "@/lib/hooks";
-import { toggleTodo } from "@/lib/features/todo/todoSlice";
+import { toggleTodo } from "@/lib/features/todo/todosSlice";
 
 interface TaskCardProps {
   todo: TodoInterface;

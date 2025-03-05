@@ -11,24 +11,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDownIcon } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { changeCategories } from "@/lib/features/options/optionsSlice";
 
 const CategoryDropdown = () => {
-  const [categories, setCategories] = React.useState<string[]>([]);
-  const cat = ["Job", "Sport", "Coding", "Food", "Football", "Walking"];
+  const dispatch = useAppDispatch();
+  const todos = useAppSelector((state) => state.todos);
+  const selectedCategories = useAppSelector(
+    (state) => state.options.selectedCategories,
+  );
+  const tags = todos.map((todo) => todo.tags.map((tag) => tag.name));
+  const categories = [...new Set(tags.flat(1))];
 
   const isChecked = (value: string) => {
-    if (categories.includes(value)) return true;
+    if (selectedCategories.includes(value)) return true;
     return false;
-  };
-
-  const handleCheck = (value: string) => {
-    if (categories.includes(value)) {
-      const newList = categories.filter((category) => category !== value);
-      setCategories(newList);
-    } else {
-      const newList = [...categories, value];
-      setCategories(newList);
-    }
   };
 
   return (
@@ -40,19 +37,19 @@ const CategoryDropdown = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[180px]">
-        {cat.map((category, i) => {
+        {categories.map((category, i) => {
           const checked = isChecked(category);
           return (
             <React.Fragment key={category}>
               <DropdownMenuCheckboxItem
                 onSelect={(e) => e.preventDefault()}
                 checked={checked}
-                onCheckedChange={() => handleCheck(category)}
+                onCheckedChange={() => dispatch(changeCategories(category))}
                 className="text-[12px]"
               >
                 {category}
               </DropdownMenuCheckboxItem>
-              {i !== cat.length - 1 && <DropdownMenuSeparator />}
+              {i !== categories.length - 1 && <DropdownMenuSeparator />}
             </React.Fragment>
           );
         })}
