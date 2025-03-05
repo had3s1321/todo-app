@@ -28,26 +28,27 @@ import {
 } from "@/components/ui/popover";
 import { CheckIcon, DeleteIcon } from "../../icons";
 import Subtask from "../Subtask";
-import { useAppDispatch } from "@/lib/hooks";
-import { addTodo } from "@/lib/features/todo/actions";
+import { useAppDispatch, useAppStore } from "@/lib/hooks";
+import { addTodo, editTodo } from "@/lib/features/todo/actions";
 import { v4 as uuidv4 } from "uuid";
 import { getTags } from "@/utils/getTags";
+import { handleFormDefaultValues } from "@/utils/handleFormDefaultValues";
 
-const TodoForm = () => {
+interface TodoFormProps {
+  taskId?: string;
+}
+
+const TodoForm = ({ taskId }: TodoFormProps) => {
   const subtaskRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const state = useAppStore();
+  const { todos } = state.getState();
+  let taskData;
+  if (taskId) taskData = todos.find((todo) => todo.id === taskId);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      priority: "1",
-      complexity: "1",
-      date: new Date(),
-      time: "",
-      subtasks: [],
-      tags: "",
-    },
+    defaultValues: handleFormDefaultValues(taskData),
   });
 
   const addSubtask = () => {
@@ -72,7 +73,7 @@ const TodoForm = () => {
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     const payload = {
-      id: uuidv4(),
+      id: taskId ? taskId : uuidv4(),
       name: values.name,
       isCompleted: false,
       priority: Number(values.priority),
@@ -84,7 +85,9 @@ const TodoForm = () => {
       }),
       tags: getTags(values.tags),
     };
-    dispatch(addTodo(payload));
+    if (taskId) {
+      dispatch(editTodo(payload));
+    } else dispatch(addTodo(payload));
     router.push("/");
   };
 
@@ -158,11 +161,11 @@ const TodoForm = () => {
                     <div key={i + 1} className="relative">
                       <RadioGroupItem
                         value={(i + 1).toString()}
-                        id={`number-${i + 10}`}
+                        id={`number-${i + 100}`}
                         className="peer sr-only"
                       />
                       <label
-                        htmlFor={`number-${i + 10}`}
+                        htmlFor={`number-${i + 100}`}
                         className="text-sm flex h-8 w-8 items-center justify-center rounded-full bg-[var(--custom-secondary)] font-medium ring-offset-background transition-colors hover:cursor-pointer hover:bg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 peer-data-[state=checked]:bg-[var(--custom-primary)] peer-data-[state=checked]:text-primary-foreground"
                       >
                         {i + 1}
