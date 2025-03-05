@@ -11,18 +11,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { ChevronDownIcon } from "../ui/icons";
+import { sortingOptions } from "@/utils/selectSortingOption";
 
 const SortDropdown = () => {
   const [sortOption, setSortOption] = useState("Default");
-  const sortOptions = [
-    "Default",
-    "Ascending Date",
-    "Descending Date",
-    "Ascending Complexity",
-    "Descending Complexity",
-    "Ascending Priority",
-    "Descending Priority",
-  ];
 
   return (
     <DropdownMenu>
@@ -37,7 +29,7 @@ const SortDropdown = () => {
           value={sortOption}
           onValueChange={setSortOption}
         >
-          {sortOptions.map((option, i) => (
+          {sortingOptions.map((option, i) => (
             <React.Fragment key={option}>
               <DropdownMenuRadioItem
                 value={option}
@@ -46,7 +38,7 @@ const SortDropdown = () => {
               >
                 {option}
               </DropdownMenuRadioItem>
-              {i !== sortOptions.length - 1 && <DropdownMenuSeparator />}
+              {i !== sortingOptions.length - 1 && <DropdownMenuSeparator />}
             </React.Fragment>
           ))}
         </DropdownMenuRadioGroup>
