@@ -13,7 +13,7 @@ export const todosReducer = createReducer(<TodoInterface[]>[], (builder) => {
       state.push(action.payload);
     })
     .addCase(toggleTodo, (state, action) => {
-      const todo = state.find((t) => t.id === action.payload.id);
+      const todo = state.find((todo) => todo.id === action.payload.id);
       if (todo) todo.isCompleted = !todo.isCompleted;
     })
     .addCase(editTodo, (state, action) => {

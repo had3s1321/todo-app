@@ -21,6 +21,8 @@ import ProgressCircle from "./ProgressCircle";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ProgressBar from "@/components/taskDetails/ProgressBar";
+import { useAppDispatch } from "@/lib/hooks";
+import { toggleTodo } from "@/lib/features/todo/actions";
 
 interface TaskCardProps {
   todo: TodoInterface;
@@ -29,6 +31,8 @@ interface TaskCardProps {
 
 const TaskCard = ({ todo, large }: TaskCardProps) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
   return (
     <Card className="w-fill relative [&>svg]:absolute [&>svg]:bottom-0 [&>svg]:right-0 [&>svg]:mb-12 [&>svg]:mr-3">
       <CardHeader>
@@ -49,7 +53,11 @@ const TaskCard = ({ todo, large }: TaskCardProps) => {
             >
               <EditTaskIconSmall />
             </Link>
-            <Button variant="round" size="smCustom">
+            <Button
+              variant="round"
+              size="smCustom"
+              onClick={() => dispatch(toggleTodo(todo))}
+            >
               <CheckIconSmall />
             </Button>
           </div>
