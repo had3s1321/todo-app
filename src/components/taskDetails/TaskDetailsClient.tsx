@@ -1,14 +1,14 @@
 "use client";
 
-import { useAppStore } from "@/lib/hooks";
 import TaskCard from "@/components/ui/custom/TaskCard";
 import Subtask from "../ui/custom/Subtask";
 import { Button } from "../ui/button";
 import { CheckIcon, RepeatIcon, TrashIcon } from "../ui/icons";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 
 const TaskDetailsClient = ({ taskId }: { taskId: string }) => {
-  const state = useAppStore();
-  const { todos } = state.getState();
+  const todos = useSelector((state: RootState) => state.todos);
   const todo = todos.find((el) => el.id === taskId);
   if (typeof todo === "undefined") {
     throw new Error("Todo not found");

@@ -9,7 +9,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "./storage";
-import { todosReducer } from "./features/todo/todosReducer";
+import todosReducer from "./features/todo/todoSlice";
 
 const persistConfig = {
   key: "root",
