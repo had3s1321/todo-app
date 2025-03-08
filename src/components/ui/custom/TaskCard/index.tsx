@@ -32,6 +32,7 @@ interface TaskCardProps {
 const TaskCard = ({ todo, large }: TaskCardProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const colors = ["bg-tag-1", "bg-tag-2", "bg-tag-3"]; // eslint-disable-line
 
   return (
     <Card className="w-fill relative [&>svg]:absolute [&>svg]:bottom-0 [&>svg]:right-0 [&>svg]:mb-12 [&>svg]:mr-3">
@@ -85,8 +86,7 @@ const TaskCard = ({ todo, large }: TaskCardProps) => {
             return (
               <div
                 key={tag.name}
-                className="rounded-[20px] px-2 py-1 text-[12px]"
-                style={{ background: tag.color }}
+                className={`rounded-[20px] px-2 py-1 text-[12px] ${tag.color}`}
               >
                 {tag.name}
               </div>
