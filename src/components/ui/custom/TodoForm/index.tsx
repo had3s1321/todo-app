@@ -28,11 +28,13 @@ import {
 } from "@/components/ui/popover";
 import { CheckIcon, DeleteIcon } from "../../icons";
 import Subtask from "../Subtask";
-import { useAppDispatch, useAppStore } from "@/lib/hooks";
-import { addTodo, editTodo } from "@/lib/features/todo/actions";
+import { useAppDispatch } from "@/lib/hooks";
+import { addTodo, editTodo } from "@/lib/features/todo/todosSlice";
 import { v4 as uuidv4 } from "uuid";
 import { getTags } from "@/utils/getTags";
 import { handleFormDefaultValues } from "@/utils/handleFormDefaultValues";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 
 interface TodoFormProps {
   taskId?: string;
@@ -42,8 +44,7 @@ const TodoForm = ({ taskId }: TodoFormProps) => {
   const subtaskRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const state = useAppStore();
-  const { todos } = state.getState();
+  const todos = useSelector((state: RootState) => state.todos);
   let taskData;
   if (taskId) taskData = todos.find((todo) => todo.id === taskId);
   const form = useForm<z.infer<typeof formSchema>>({

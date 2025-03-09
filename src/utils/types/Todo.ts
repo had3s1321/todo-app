@@ -1,3 +1,8 @@
+export interface SubtaskInterface {
+  name: string;
+  isCompleted: boolean;
+}
+
 export interface TodoInterface {
   id: string;
   name: string;
@@ -6,10 +11,7 @@ export interface TodoInterface {
   complexity: number;
   date: string;
   time: string;
-  subtasks: {
-    name: string;
-    isCompleted: boolean;
-  }[];
+  subtasks: SubtaskInterface[];
   tags: {
     name: string;
     color: string;

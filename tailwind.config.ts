@@ -50,6 +50,11 @@ export default {
           "4": "var(--chart-4)",
           "5": "var(--chart-5)",
         },
+        tag: {
+          "1": "#fff6e8",
+          "2": "#ecffe8",
+          "3": "#e8feff",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -8,16 +8,19 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { todosReducer } from "./features/todo/todosReducer";
+import storage from "./storage";
+import todosReducer from "./features/todo/todosSlice";
+import optionsReducer from "./features/options/optionsSlice";
 
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["options"],
 };
 
 const combinedReducers = combineReducers({
   todos: todosReducer,
+  options: optionsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, combinedReducers);

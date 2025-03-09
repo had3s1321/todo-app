@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,18 +11,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { ChevronDownIcon } from "../ui/icons";
+import { sortingOptions } from "@/utils/selectSortingOption";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { changeSortingOption } from "@/lib/features/options/optionsSlice";
 
 const SortDropdown = () => {
-  const [sortOption, setSortOption] = useState("Default");
-  const sortOptions = [
-    "Default",
-    "Ascending Date",
-    "Descending Date",
-    "Ascending Complexity",
-    "Descending Complexity",
-    "Ascending Priority",
-    "Descending Priority",
-  ];
+  const dispatch = useAppDispatch();
+  const sortOption = useAppSelector((state) => state.options.sortOption);
 
   return (
     <DropdownMenu>
@@ -35,9 +30,9 @@ const SortDropdown = () => {
       <DropdownMenuContent className="w-full">
         <DropdownMenuRadioGroup
           value={sortOption}
-          onValueChange={setSortOption}
+          onValueChange={(value) => dispatch(changeSortingOption(value))}
         >
-          {sortOptions.map((option, i) => (
+          {sortingOptions.map((option, i) => (
             <React.Fragment key={option}>
               <DropdownMenuRadioItem
                 value={option}
@@ -46,7 +41,7 @@ const SortDropdown = () => {
               >
                 {option}
               </DropdownMenuRadioItem>
-              {i !== sortOptions.length - 1 && <DropdownMenuSeparator />}
+              {i !== sortingOptions.length - 1 && <DropdownMenuSeparator />}
             </React.Fragment>
           ))}
         </DropdownMenuRadioGroup>

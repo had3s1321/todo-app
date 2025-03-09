@@ -13,7 +13,9 @@ export default function Home() {
         <SortDropdown />
         <CategoryDropdown />
       </div>
-      <TodosList />
+      <TodosList status="pending" />
+      <h3>Completed:</h3>
+      <TodosList status="completed" />
       <Link
         href="/add-task"
         className="mx-auto flex gap-2 rounded-[30px] bg-[var(--custom-primary)] p-4 text-[18px] text-white"
