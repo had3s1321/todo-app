@@ -23,6 +23,10 @@ import { useRouter } from "next/navigation";
 import ProgressBar from "@/components/taskDetails/ProgressBar";
 import { useAppDispatch } from "@/lib/hooks";
 import { toggleTodo } from "@/lib/features/todo/todosSlice";
+import {
+  calculatePercentage,
+  getCompletedSubtasksCount,
+} from "@/utils/calculatePercentage";
 
 interface TaskCardProps {
   todo: TodoInterface;
@@ -32,6 +36,9 @@ interface TaskCardProps {
 const TaskCard = ({ todo, large }: TaskCardProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const subtaskCount = todo.subtasks.length;
+  const completedSubtasks = getCompletedSubtasksCount(todo.subtasks);
+  const percentage = calculatePercentage(subtaskCount, completedSubtasks);
   const colors = ["bg-tag-1", "bg-tag-2", "bg-tag-3"]; // eslint-disable-line
 
   return (
@@ -92,9 +99,9 @@ const TaskCard = ({ todo, large }: TaskCardProps) => {
               </div>
             );
           })}
-        {large && <ProgressBar />}
+        {large && <ProgressBar value={percentage} />}
       </CardFooter>
-      {!large && <ProgressCircle color="blue" percentage={50} />}
+      {!large && <ProgressCircle color="blue" percentage={percentage} />}
     </Card>
   );
 };
