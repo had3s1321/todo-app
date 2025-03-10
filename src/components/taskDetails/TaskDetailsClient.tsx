@@ -55,7 +55,7 @@ const TaskDetailsClient = ({ taskId }: { taskId: string }) => {
         size="xlCustomFull"
         className="bg-[var(--custom-danger-secondary)] text-[18px]"
       >
-        <TrashIcon />
+        <TrashIcon dark />
         Delete Tasks
       </Button>
     </>

@@ -16,13 +16,14 @@ import {
   CalendarIcon,
   CheckIconSmall,
   EditTaskIconSmall,
+  TrashIcon,
 } from "../../icons";
 import ProgressCircle from "./ProgressCircle";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ProgressBar from "@/components/taskDetails/ProgressBar";
 import { useAppDispatch } from "@/lib/hooks";
-import { toggleTodo } from "@/lib/features/todo/todosSlice";
+import { removeTodo, toggleTodo } from "@/lib/features/todo/todosSlice";
 import {
   calculatePercentage,
   getCompletedSubtasksCount,
@@ -45,7 +46,7 @@ const TaskCard = ({ todo, large }: TaskCardProps) => {
     <Card className="w-fill relative [&>svg]:absolute [&>svg]:bottom-0 [&>svg]:right-0 [&>svg]:mb-12 [&>svg]:mr-3">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
-          <div className="flex gap-2">
+          <div className={`flex gap-2 ${large && "mb-3"}`}>
             <div className="h-4 w-4 rounded-full border-none bg-red-500"></div>
             <h2
               className="hover:cursor-pointer"
@@ -54,21 +55,30 @@ const TaskCard = ({ todo, large }: TaskCardProps) => {
               {todo.name}
             </h2>
           </div>
-          <div className="flex gap-3">
-            <Link
-              href={`/edit-task/${todo.id}`}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--custom-secondary)]"
-            >
-              <EditTaskIconSmall />
-            </Link>
-            <Button
-              variant="round"
-              size="smCustom"
-              onClick={() => dispatch(toggleTodo(todo))}
-            >
-              <CheckIconSmall />
-            </Button>
-          </div>
+          {!large && (
+            <div className="flex gap-3">
+              <Link
+                href={`/edit-task/${todo.id}`}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--custom-secondary)]"
+              >
+                <EditTaskIconSmall />
+              </Link>
+              <Button
+                variant="round"
+                size="smCustom"
+                onClick={() => dispatch(removeTodo(todo))}
+              >
+                <TrashIcon />
+              </Button>
+              <Button
+                variant="round"
+                size="smCustom"
+                onClick={() => dispatch(toggleTodo(todo))}
+              >
+                <CheckIconSmall />
+              </Button>
+            </div>
+          )}
         </CardTitle>
       </CardHeader>
       <CardContent className={`flex flex-col gap-${large ? "4" : "1.5"}`}>
