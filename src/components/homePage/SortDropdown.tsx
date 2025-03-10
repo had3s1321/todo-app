@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { ChevronDownIcon } from "../ui/icons";
-import { sortingOptions } from "@/utils/selectSortingOption";
+import { sortingOptions } from "@/utils/handleSort";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { changeSortingOption } from "@/lib/features/options/optionsSlice";
 

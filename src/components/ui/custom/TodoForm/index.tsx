@@ -73,12 +73,14 @@ const TodoForm = ({ taskId }: TodoFormProps) => {
   };
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
+    const now = Date.now();
     const payload = {
       id: taskId ? taskId : uuidv4(),
       name: values.name,
       isCompleted: false,
       priority: Number(values.priority),
       complexity: Number(values.complexity),
+      createdAt: now,
       date: values.date.toISOString().substring(0, 10),
       time: values.time,
       subtasks: values.subtasks.map((subtask) => {

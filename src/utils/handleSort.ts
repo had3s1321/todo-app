@@ -12,7 +12,7 @@ export const sortingOptions = [
   "Descending Priority",
 ];
 
-export const selectSortingOption = (
+export const handleSort = (
   option: SortingOptions,
   a: TodoInterface,
   b: TodoInterface,
@@ -40,6 +40,6 @@ export const selectSortingOption = (
     case "Power Mode":
       return b.priority + b.complexity - (a.priority + a.complexity);
     default:
-      return;
+      return a.createdAt - b.createdAt;
   }
 };
