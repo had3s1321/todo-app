@@ -81,7 +81,7 @@ const TodoForm = ({ taskId }: TodoFormProps) => {
       priority: Number(values.priority),
       complexity: Number(values.complexity),
       createdAt: now,
-      date: values.date.toISOString().substring(0, 10),
+      date: format(values.date, "yyyy-MM-dd"),
       time: values.time,
       subtasks: values.subtasks.map((subtask) => {
         return { name: subtask, isCompleted: false };

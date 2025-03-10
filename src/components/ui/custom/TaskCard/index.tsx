@@ -1,5 +1,10 @@
 "use client";
 
+// "bg-tag-1", "bg-tag-2", "bg-tag-3", "bg-[var(--custom-danger-primary)]",
+// "bg-[var(--custom-warning)]", "bg-[var(--custom-primary)]",
+// "text-[var(--custom-danger-primary)]", "text-[var(--custom-warning)]",
+// "text-[var(--custom-primary)]"
+
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +33,7 @@ import {
   calculatePercentage,
   getCompletedSubtasksCount,
 } from "@/utils/calculatePercentage";
+import { setUrgencyLevel } from "@/utils/dateAndTime";
 
 interface TaskCardProps {
   todo: TodoInterface;
@@ -40,14 +46,16 @@ const TaskCard = ({ todo, large }: TaskCardProps) => {
   const subtaskCount = todo.subtasks.length;
   const completedSubtasks = getCompletedSubtasksCount(todo.subtasks);
   const percentage = calculatePercentage(subtaskCount, completedSubtasks);
-  const colors = ["bg-tag-1", "bg-tag-2", "bg-tag-3"]; // eslint-disable-line
+  const urgency = setUrgencyLevel(todo.date, todo.time);
 
   return (
     <Card className="w-fill relative [&>svg]:absolute [&>svg]:bottom-0 [&>svg]:right-0 [&>svg]:mb-12 [&>svg]:mr-3">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <div className={`flex gap-2 ${large && "mb-3"}`}>
-            <div className="h-4 w-4 rounded-full border-none bg-red-500"></div>
+            <div
+              className={`h-4 w-4 rounded-full border-none ${urgency?.background}`}
+            ></div>
             <h2
               className="hover:cursor-pointer"
               onClick={() => router.push(`/task-detail/${todo.id}`)}
@@ -85,7 +93,10 @@ const TaskCard = ({ todo, large }: TaskCardProps) => {
         <div className="flex gap-1.5">
           <CalendarIcon />
           <div>
-            Due Data: {todo.date}, {todo.time}
+            Due Data:{" "}
+            <span className={`${urgency?.text}`}>
+              {todo.date}, {todo.time}
+            </span>
           </div>
         </div>
         <div className="flex gap-1.5">
