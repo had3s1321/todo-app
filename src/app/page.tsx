@@ -1,5 +1,6 @@
 import ButtonsGroup from "@/components/homePage/ButtonsGroup";
 import CategoryDropdown from "@/components/homePage/CategoryDropdown";
+import GenerateItemsModal from "@/components/homePage/GenerateItemsModal";
 import SearchBar from "@/components/homePage/SearchBar";
 import SortDropdown from "@/components/homePage/SortDropdown";
 import TodosList from "@/components/homePage/TodosList";
@@ -15,6 +16,7 @@ export default function Home() {
       <TodosList status="pending" />
       <TodosList status="completed" />
       <ButtonsGroup />
+      <GenerateItemsModal />
     </>
   );
 }

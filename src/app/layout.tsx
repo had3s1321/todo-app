@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-custom-bg antialiased`}>
         <StoreProvider>
-          <main className="mb-16 flex w-[398px] flex-col gap-5 pt-16">
+          <main className="relative mb-16 flex w-[398px] flex-col gap-5 pt-16">
             {children}
           </main>
         </StoreProvider>

@@ -35,7 +35,7 @@ const buttonVariants = cva(
         smCustom: "h-[32px] w-[32px] [&_svg]:size-[18px]",
         noCustom: "h-[36px] w-[36px] [&_svg]:size-[24px]",
         lgCustom: "h-[44px] w-[44px] [&_svg]:size-[24px]",
-        xlCustom: "h-[56px] w-[192px] [&_svg]:size-[24px]",
+        xlCustom: "h-[60px] w-[192px] [&_svg]:size-[24px]",
         xlCustomFull: "h-[60px] w-full [&_svg]:size-[24px]",
       },
     },

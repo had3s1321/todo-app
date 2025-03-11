@@ -6,6 +6,7 @@ interface OptionsState {
   selectedCategories: string[];
   filterValue: string;
   powerMode: boolean;
+  isModalOpen: boolean;
 }
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   selectedCategories: [],
   filterValue: "",
   powerMode: false,
+  isModalOpen: false,
 } satisfies OptionsState as OptionsState;
 
 const optionsSlice = createSlice({
@@ -35,6 +37,9 @@ const optionsSlice = createSlice({
     togglePowerMode: (state) => {
       state.powerMode = !state.powerMode;
     },
+    toggleModal: (state) => {
+      state.isModalOpen = !state.isModalOpen;
+    },
   },
 });
 
@@ -43,5 +48,6 @@ export const {
   changeCategories,
   changeFilterValue,
   togglePowerMode,
+  toggleModal,
 } = optionsSlice.actions;
 export default optionsSlice.reducer;

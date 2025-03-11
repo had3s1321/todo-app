@@ -1,13 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { PlusIcon, PowerIcon } from "../ui/icons";
+import { PlusIcon, PowerIcon, RandomArrows } from "../ui/icons";
 import { Button } from "../ui/button";
-import { useAppDispatch } from "@/lib/hooks";
-import { togglePowerMode } from "@/lib/features/options/optionsSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import {
+  toggleModal,
+  togglePowerMode,
+} from "@/lib/features/options/optionsSlice";
 
 const ButtonsGroup = () => {
   const dispatch = useAppDispatch();
+  const todos = useAppSelector((state) => state.todos);
+
   return (
     <>
       <Link
@@ -17,15 +22,28 @@ const ButtonsGroup = () => {
         <PlusIcon />
         <p className="hover:cursor-pointer">Add new Task</p>
       </Link>
-      <Button
-        size="xlCustom"
-        variant="submit"
-        className="rounded-[30px]"
-        onClick={() => dispatch(togglePowerMode())}
-      >
-        <PowerIcon />
-        <p>Power Mode</p>
-      </Button>
+      {todos.length > 1 ? (
+        <Button
+          size="xlCustom"
+          variant="submit"
+          className="rounded-[30px]"
+          onClick={() => dispatch(togglePowerMode())}
+        >
+          <PowerIcon />
+          <p>Power Mode</p>
+        </Button>
+      ) : null}
+      {!todos.length ? (
+        <Button
+          size="xlCustom"
+          variant="submit"
+          className="rounded-[30px]"
+          onClick={() => dispatch(toggleModal())}
+        >
+          <RandomArrows />
+          <p>Generate Items</p>
+        </Button>
+      ) : null}
     </>
   );
 };
