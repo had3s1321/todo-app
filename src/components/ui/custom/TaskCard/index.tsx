@@ -34,6 +34,7 @@ import {
   getCompletedSubtasksCount,
 } from "@/utils/calculatePercentage";
 import { setUrgencyLevel } from "@/utils/dateAndTime";
+import { numberToPriorityLevel } from "@/utils/numberToPriorityLevel";
 
 interface TaskCardProps {
   todo: TodoInterface;
@@ -94,7 +95,7 @@ const TaskCard = ({ todo, large }: TaskCardProps) => {
           <div className="flex gap-1.5">
             <CalendarIcon />
             <div>
-              Due Data:{" "}
+              <span className="text-[var(--custom-grey)]">Due Data: </span>
               <span className={`${urgency?.text}`}>
                 {todo.date}, {todo.time}
               </span>
@@ -102,11 +103,17 @@ const TaskCard = ({ todo, large }: TaskCardProps) => {
           </div>
           <div className="flex gap-1.5">
             <ArrowUpIcon />
-            <div>Priority: {todo.priority}</div>
+            <div>
+              <span className="text-[var(--custom-grey)]">Priority: </span>
+              <span>{numberToPriorityLevel(todo.priority)}</span>
+            </div>
           </div>
           <div className="flex gap-1.5">
             <ArrowsIcon />
-            <div>Complexity: {todo.complexity}</div>
+            <div>
+              <span className="text-[var(--custom-grey)]">Complexity: </span>
+              <span>{numberToPriorityLevel(todo.complexity)}</span>
+            </div>
           </div>
         </CardContent>
         <CardFooter className="flex gap-4">
