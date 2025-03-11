@@ -49,81 +49,83 @@ const TaskCard = ({ todo, large }: TaskCardProps) => {
   const urgency = setUrgencyLevel(todo.date, todo.time);
 
   return (
-    <Card className="w-fill relative [&>svg]:absolute [&>svg]:bottom-0 [&>svg]:right-0 [&>svg]:mb-12 [&>svg]:mr-3">
-      <CardHeader>
-        <CardTitle className="flex items-center justify-between">
-          <div className={`flex gap-2 ${large && "mb-3"}`}>
-            <div
-              className={`h-4 w-4 rounded-full border-none ${urgency?.background}`}
-            ></div>
-            <h2
-              className="hover:cursor-pointer"
-              onClick={() => router.push(`/task-detail/${todo.id}`)}
-            >
-              {todo.name}
-            </h2>
-          </div>
-          {!large && (
-            <div className="flex gap-3">
-              <Link
-                href={`/edit-task/${todo.id}`}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--custom-secondary)]"
-              >
-                <EditTaskIconSmall />
-              </Link>
-              <Button
-                variant="round"
-                size="smCustom"
-                onClick={() => dispatch(removeTodo(todo))}
-              >
-                <TrashIcon />
-              </Button>
-              <Button
-                variant="round"
-                size="smCustom"
-                onClick={() => dispatch(toggleTodo(todo))}
-              >
-                <CheckIconSmall />
-              </Button>
-            </div>
-          )}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className={`flex flex-col gap-${large ? "4" : "1.5"}`}>
-        <div className="flex gap-1.5">
-          <CalendarIcon />
-          <div>
-            Due Data:{" "}
-            <span className={`${urgency?.text}`}>
-              {todo.date}, {todo.time}
-            </span>
-          </div>
-        </div>
-        <div className="flex gap-1.5">
-          <ArrowUpIcon />
-          <div>Priority: {todo.priority}</div>
-        </div>
-        <div className="flex gap-1.5">
-          <ArrowsIcon />
-          <div>Complexity: {todo.complexity}</div>
-        </div>
-      </CardContent>
-      <CardFooter className="flex gap-4">
-        {!large &&
-          todo.tags.map((tag) => {
-            return (
+    <li className="[&:not(:last-child)]:mb-6">
+      <Card className="w-fill relative [&>svg]:absolute [&>svg]:bottom-0 [&>svg]:right-0 [&>svg]:mb-12 [&>svg]:mr-3">
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <div className={`flex gap-2 ${large && "mb-3"}`}>
               <div
-                key={tag.name}
-                className={`rounded-[20px] px-2 py-1 text-[12px] ${tag.color}`}
+                className={`h-4 w-4 rounded-full border-none ${urgency?.background}`}
+              ></div>
+              <h2
+                className="hover:cursor-pointer"
+                onClick={() => router.push(`/task-detail/${todo.id}`)}
               >
-                {tag.name}
+                {todo.name}
+              </h2>
+            </div>
+            {!large && (
+              <div className="flex gap-3">
+                <Link
+                  href={`/edit-task/${todo.id}`}
+                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--custom-secondary)]"
+                >
+                  <EditTaskIconSmall />
+                </Link>
+                <Button
+                  variant="round"
+                  size="smCustom"
+                  onClick={() => dispatch(removeTodo(todo))}
+                >
+                  <TrashIcon />
+                </Button>
+                <Button
+                  variant="round"
+                  size="smCustom"
+                  onClick={() => dispatch(toggleTodo(todo))}
+                >
+                  <CheckIconSmall />
+                </Button>
               </div>
-            );
-          })}
-        {large && <ProgressBar value={percentage} />}
-      </CardFooter>
-      {!large && <ProgressCircle color="blue" percentage={percentage} />}
-    </Card>
+            )}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className={`flex flex-col gap-${large ? "4" : "1.5"}`}>
+          <div className="flex gap-1.5">
+            <CalendarIcon />
+            <div>
+              Due Data:{" "}
+              <span className={`${urgency?.text}`}>
+                {todo.date}, {todo.time}
+              </span>
+            </div>
+          </div>
+          <div className="flex gap-1.5">
+            <ArrowUpIcon />
+            <div>Priority: {todo.priority}</div>
+          </div>
+          <div className="flex gap-1.5">
+            <ArrowsIcon />
+            <div>Complexity: {todo.complexity}</div>
+          </div>
+        </CardContent>
+        <CardFooter className="flex gap-4">
+          {!large &&
+            todo.tags.map((tag) => {
+              return (
+                <div
+                  key={tag.name}
+                  className={`rounded-[20px] px-2 py-1 text-[12px] ${tag.color}`}
+                >
+                  {tag.name}
+                </div>
+              );
+            })}
+          {large && <ProgressBar value={percentage} />}
+        </CardFooter>
+        {!large && <ProgressCircle color="blue" percentage={percentage} />}
+      </Card>
+    </li>
   );
 };
 
