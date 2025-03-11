@@ -28,6 +28,19 @@ const TaskDetailsClient = ({ taskId }: { taskId: string }) => {
     dispatch(editTodo(newTodo));
   };
 
+  const repeatSubtasks = () => {
+    const newSubtasks = todo.subtasks.map((subtask) => {
+      return { ...subtask, isCompleted: false };
+    });
+    const newTodo = { ...todo, subtasks: newSubtasks };
+    dispatch(editTodo(newTodo));
+  };
+
+  const deleteSubtasks = () => {
+    const newTodo = { ...todo, subtasks: [] };
+    dispatch(editTodo(newTodo));
+  };
+
   return (
     <>
       <TaskCard todo={todo} large />
@@ -47,6 +60,7 @@ const TaskDetailsClient = ({ taskId }: { taskId: string }) => {
       <Button
         size="xlCustomFull"
         className="bg-[var(--custom-primary)] text-[18px] text-[var(--custom-light)]"
+        onClick={repeatSubtasks}
       >
         <RepeatIcon />
         Repeat Tasks
@@ -54,6 +68,7 @@ const TaskDetailsClient = ({ taskId }: { taskId: string }) => {
       <Button
         size="xlCustomFull"
         className="bg-[var(--custom-danger-secondary)] text-[18px]"
+        onClick={deleteSubtasks}
       >
         <TrashIcon dark />
         Delete Tasks

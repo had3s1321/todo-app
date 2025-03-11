@@ -125,6 +125,10 @@ button > *:hover {
   cursor: pointer;
 }
 
+li {
+  list-style: none;
+}
+
 @layer utilities {
   .custom-time-picker {
     position: relative;
