@@ -65,6 +65,11 @@ export default {
     fontSize: {
       base: "16px",
     },
+    boxShadow: {
+      "custom-shadow": `inset 0px 1px 1px 0px rgba(255, 255, 255, 0.1), 
+      0px 50px 100px -20px rgba(50, 50, 93, 0.25), 
+      0px 30px 60px -30px rgba(0, 0, 0, 0.3)`,
+    },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

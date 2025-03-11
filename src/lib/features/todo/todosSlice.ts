@@ -8,7 +8,9 @@ const todosSlice = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      state.push(action.payload);
+      const { payload } = action;
+      if (Array.isArray(payload)) state.push(...payload);
+      else state.push(payload);
     },
     toggleTodo: (state, action) => {
       const todo = state.find((todo) => todo.id === action.payload.id);
