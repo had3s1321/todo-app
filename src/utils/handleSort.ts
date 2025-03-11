@@ -1,4 +1,4 @@
-import { convertDateAndTimeToMilliseconds } from "./convertDateAndTimeToMilliseconds";
+import { convertDateAndTimeToMilliseconds } from "./dateAndTime";
 import { SortingOptions } from "./types/SortingOptions";
 import { TodoInterface } from "./types/Todo";
 

@@ -14,7 +14,6 @@ export default function Home() {
         <CategoryDropdown />
       </div>
       <TodosList status="pending" />
-      <h3>Completed:</h3>
       <TodosList status="completed" />
       <Link
         href="/add-task"

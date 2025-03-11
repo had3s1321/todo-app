@@ -4,11 +4,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface OptionsState {
   sortOption: SortingOptions;
   selectedCategories: string[];
+  filterValue: string;
 }
 
 const initialState = {
   sortOption: "Default",
   selectedCategories: [],
+  filterValue: "",
 } satisfies OptionsState as OptionsState;
 
 const optionsSlice = createSlice({
@@ -25,8 +27,12 @@ const optionsSlice = createSlice({
         );
       else state.selectedCategories.push(action.payload);
     },
+    changeFilterValue: (state, action: PayloadAction<string>) => {
+      state.filterValue = action.payload;
+    },
   },
 });
 
-export const { changeSortingOption, changeCategories } = optionsSlice.actions;
+export const { changeSortingOption, changeCategories, changeFilterValue } =
+  optionsSlice.actions;
 export default optionsSlice.reducer;

@@ -52,10 +52,18 @@ const TodoForm = ({ taskId }: TodoFormProps) => {
     defaultValues: handleFormDefaultValues(taskData),
   });
 
+  const handleChange = () => {
+    const input = subtaskRef.current;
+    if (input && input.value && !/^\d+\. /.test(input.value.substring(0, 3))) {
+      const subtasksLength = form.getValues("subtasks").length;
+      input.value = `${subtasksLength + 1}. ${input.value}`;
+    }
+  };
+
   const addSubtask = () => {
     if (!subtaskRef.current) return;
 
-    const newSubtask = subtaskRef.current.value.trim();
+    const newSubtask = subtaskRef.current.value.trim().substring(3);
     if (!newSubtask) return;
 
     if (form.getValues("subtasks").includes(newSubtask)) return;
@@ -81,7 +89,7 @@ const TodoForm = ({ taskId }: TodoFormProps) => {
       priority: Number(values.priority),
       complexity: Number(values.complexity),
       createdAt: now,
-      date: values.date.toISOString().substring(0, 10),
+      date: format(values.date, "yyyy-MM-dd"),
       time: values.time,
       subtasks: values.subtasks.map((subtask) => {
         return { name: subtask, isCompleted: false };
@@ -253,21 +261,28 @@ const TodoForm = ({ taskId }: TodoFormProps) => {
                 Add Checklist for subtasks
               </FormLabel>
               {Array.isArray(field.value) &&
-                field.value.map((subtask) => (
-                  <Subtask name={subtask} key={subtask}>
-                    <Button
-                      type="button"
-                      variant="round"
-                      className="absolute right-[2%] top-[20%] flex bg-[var(--custom-danger-secondary)] px-2"
-                      onClick={() => removeSubtask(subtask)}
-                    >
-                      <DeleteIcon />
-                    </Button>
-                  </Subtask>
-                ))}
+                field.value.map((subtask, i) => {
+                  const indexedSubtask = `${i + 1}. ${subtask}`;
+                  return (
+                    <Subtask name={indexedSubtask} key={subtask}>
+                      <Button
+                        type="button"
+                        variant="round"
+                        className="absolute right-[2%] top-[20%] flex bg-[var(--custom-danger-secondary)] px-2"
+                        onClick={() => removeSubtask(subtask)}
+                      >
+                        <DeleteIcon />
+                      </Button>
+                    </Subtask>
+                  );
+                })}
               <FormControl>
                 <div className="relative">
-                  <Input placeholder="Add a subtask..." ref={subtaskRef} />
+                  <Input
+                    placeholder="Add a subtask..."
+                    ref={subtaskRef}
+                    onChange={handleChange}
+                  />
                   <Button
                     type="button"
                     variant="round"
