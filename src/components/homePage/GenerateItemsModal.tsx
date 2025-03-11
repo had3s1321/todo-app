@@ -14,7 +14,7 @@ const GenerateItemsModal = () => {
   const handleModal = (e: React.MouseEvent<HTMLButtonElement>) => {
     const value = (e.target as HTMLButtonElement).value;
     const newTodos = generateItems(Number(value));
-    dispatch(addTodo(newTodos.flat()));
+    dispatch(addTodo(newTodos));
     dispatch(toggleModal());
   };
 

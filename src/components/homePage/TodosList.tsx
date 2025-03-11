@@ -13,7 +13,6 @@ const TodosList = ({ status }: { status: "completed" | "pending" }) => {
   if (status === "completed") list = todos.filter((todo) => todo.isCompleted);
   else list = todos.filter((todo) => !todo.isCompleted);
   if (powerMode && status === "completed") return null;
-
   return (
     <ul className={`${status === "completed" && "opacity-50"}`}>
       {powerMode

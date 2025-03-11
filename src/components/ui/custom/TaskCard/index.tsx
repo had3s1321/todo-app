@@ -53,13 +53,14 @@ const TaskCard = ({ todo, large }: TaskCardProps) => {
     <li className="[&:not(:last-child)]:mb-6">
       <Card className="w-fill relative [&>svg]:absolute [&>svg]:bottom-0 [&>svg]:right-0 [&>svg]:mb-12 [&>svg]:mr-3">
         <CardHeader>
-          <CardTitle className="flex items-center justify-between">
-            <div className={`flex gap-2 ${large && "mb-3"}`}>
+          <CardTitle className="flex items-center justify-between gap-4">
+            <div className={`flex gap-2 ${large && "mb-3"} min-w-0 flex-1`}>
               <div
                 className={`h-4 w-4 rounded-full border-none ${urgency?.background}`}
               ></div>
               <h2
-                className="hover:cursor-pointer"
+                title={todo.name}
+                className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap hover:cursor-pointer"
                 onClick={() => router.push(`/task-detail/${todo.id}`)}
               >
                 {todo.name}

@@ -38,7 +38,7 @@ export const generateItems = (num: number) => {
       .toISOString();
     const todo = {
       id: uuidv4(),
-      task: faker.lorem.sentence({ min: 3, max: 5 }),
+      name: faker.lorem.sentence({ min: 3, max: 5 }),
       priority: faker.number.int({ min: 1, max: 10 }),
       complexity: faker.number.int({ min: 1, max: 10 }),
       date: dateAndTime.substring(0, 10),

@@ -116,8 +116,10 @@ button {
 }
 
 p:hover,
-h1,
-h2 {
+h1:hover,
+h2:hover,
+h3:hover,
+span:hover {
   cursor: default;
 }
 
