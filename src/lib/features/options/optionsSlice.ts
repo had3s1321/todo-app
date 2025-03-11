@@ -5,12 +5,14 @@ interface OptionsState {
   sortOption: SortingOptions;
   selectedCategories: string[];
   filterValue: string;
+  powerMode: boolean;
 }
 
 const initialState = {
   sortOption: "Default",
   selectedCategories: [],
   filterValue: "",
+  powerMode: false,
 } satisfies OptionsState as OptionsState;
 
 const optionsSlice = createSlice({
@@ -30,9 +32,16 @@ const optionsSlice = createSlice({
     changeFilterValue: (state, action: PayloadAction<string>) => {
       state.filterValue = action.payload;
     },
+    togglePowerMode: (state) => {
+      state.powerMode = !state.powerMode;
+    },
   },
 });
 
-export const { changeSortingOption, changeCategories, changeFilterValue } =
-  optionsSlice.actions;
+export const {
+  changeSortingOption,
+  changeCategories,
+  changeFilterValue,
+  togglePowerMode,
+} = optionsSlice.actions;
 export default optionsSlice.reducer;
