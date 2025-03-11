@@ -18,9 +18,20 @@ export default function StoreProvider({
   }
   const persistedStore = persistStore(storeRef.current);
 
+  // delay rehydration so that the loader can be displayed for at least 1 sec
+  const handleBeforeLift = () => {
+    return new Promise<void>((resolve) => {
+      setTimeout(() => resolve(), 1000); // 1 second delay
+    });
+  };
+
   return (
     <Provider store={storeRef.current}>
-      <PersistGate loading={<Preloader />} persistor={persistedStore}>
+      <PersistGate
+        loading={<Preloader />}
+        persistor={persistedStore}
+        onBeforeLift={handleBeforeLift}
+      >
         {children}
       </PersistGate>
     </Provider>
