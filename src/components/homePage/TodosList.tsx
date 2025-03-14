@@ -22,7 +22,9 @@ const TodosList = ({ status }: { status: "completed" | "pending" }) => {
             .slice(0, 1)
             .map((todo) => <TaskCard todo={todo} key={todo.id} />)
         : list
-            .filter((todo) => todo.name.includes(filterValue))
+            .filter((todo) =>
+              todo.name.toLowerCase().includes(filterValue.toLowerCase()),
+            )
             .filter(
               (todo) => checkForTags(todo.tags, selectedCategories) && todo,
             )
